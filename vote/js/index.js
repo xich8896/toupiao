@@ -50,17 +50,23 @@ let indexRender = (()=> {
         $.each(resultList, (index, item)=> {
             str += `<li>
                 <a href="detail.html?userId=${item['id']}">
-                    <img src="${item['picture']}" alt="" class="picture">
+                    <img src="${item['picture']}" alt="" 
+class="picture">
                     <p class="title">
                         <span>${item['name']}</span>
                         |
-                        <span>编号#${item['matchId']}</span>
+                        <span>编号#${item['matchId']}
+</span>
                     </p>
-                    <p class="slogan">${item['slogan']}</p>
+                    <p class="slogan">${item['slogan']}
+</p>
                 </a>
                 <div class="vote">
-                    <span class="voteNum">${item['voteNum']}</span>
-                    ${item['isVote'] === 0 ? `<a href="javascript:;" class="voteBtn" data-id="${item['id']}">投他一票</a>` : ``}
+                    <span class="voteNum">${item
+                ['voteNum']}</span>
+                    ${item['isVote'] === 0 ? `<a 
+href="javascript:;" class="voteBtn" data-id="${item
+                ['id']}">投他一票</a>` : ``}
                 </div>
             </li>`;
         });
@@ -71,9 +77,15 @@ let indexRender = (()=> {
     //->滚动加载更多
     let scrollEvent = ()=> {
         let fn = ()=> {
-            let clientH = document.documentElement.clientHeight || document.body.clientHeight,
-                scrollT = document.documentElement.scrollTop || document.body.scrollTop,
-                scrollH = document.documentElement.scrollHeight || document.body.scrollHeight;
+            let clientH =
+                document.documentElement.clientHeight ||
+                document.body.clientHeight,
+                scrollT =
+                    document.documentElement.scrollTop ||
+                    document.body.scrollTop,
+                scrollH =
+                    document.documentElement.scrollHeight ||
+                    document.body.scrollHeight;
 
             if (clientH + scrollT + 200 >= scrollH) {
                 //=>还差100PX就到页面最底部了:此时我们加载更多数据
@@ -126,7 +138,8 @@ let indexRender = (()=> {
             isVoting = true;
 
             //->投票
-            let participantId = parseFloat(target.getAttribute('data-id'));
+            let participantId = parseFloat
+            (target.getAttribute('data-id'));
             $.ajax({
                 url: '/vote',
                 dataType: 'json',
@@ -144,7 +157,8 @@ let indexRender = (()=> {
                     new Dialog('感谢您的支持!', function () {
                         let $target = $(target),
                             $prev = $target.prev();
-                        $prev.html(parseFloat($prev.html()) + 1);
+                        $prev.html(parseFloat($prev.html()) +
+                            1);
                         $target.remove();
                     });
                 }

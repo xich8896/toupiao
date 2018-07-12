@@ -11,20 +11,20 @@ let $ = require('./BACK/TOOL');
 http.createServer((req, res)=> {
     let {pathname, query}=url.parse(req.url, true);
 
-    //->resource file request
-    let suffixReg = /\.([a-zA-Z0-9]+)$/i;
-    if (suffixReg.test(pathname)) {
-        let suffix = suffixReg.exec(pathname)[1],
-            suffixMIME = $.queryMIME(suffix);
-        try {
-            $.responseData(res, fs.readFileSync(`.${pathname}`), 200, suffixMIME);
-        } catch (e) {
-            $.responseData(res, 'NOT FOUND!', 404, 'text/plain');
-        }
+        //->resource file request
+        let suffixReg = /\.([a-zA-Z0-9]+)$/i;
+        if (suffixReg.test(pathname)) {
+            let suffix = suffixReg.exec(pathname)[1],
+                suffixMIME = $.queryMIME(suffix);
+            try {
+                $.responseData(res, fs.readFileSync(`.${pathname}`), 200, suffixMIME);
+            } catch (e) {
+                $.responseData(res, 'NOT FOUND!', 404, 'text/plain');
+            }
         return;
     }
 
-    //->getMatchList
+    //->getMatchList 加载参赛人员列表信息
     if (pathname === '/getMatchList') {
         let {limit, page, search, userId}=query;
         limit = parseFloat(limit);
